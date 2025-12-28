@@ -3,10 +3,7 @@ using namespace std;
 
 class Shape{
 public:
-    virtual void area(){
-        cout << "Area of shape is undefined." << endl;
-    }
-    
+    virtual void area() = 0;    
     virtual ~Shape() {}
 };
 
@@ -40,17 +37,38 @@ public:
 };
 
 int main() {
-    Shape* s1;
-    Shape* s2;
+    Shape* shape = nullptr;
+    int choice;
 
-    Rectangle r(5, 4);
-    Circle c(3);
+    cout << "Choose Shape : \n";
+    cout << "1. Rectangle \n";
+    cout << "2. Circle \n";
+    cout << "Enter choice: ";
+    cin >> choice ;
 
-    s1 = &r;
-    s2 = &c;
+    if (choice == 1){
+        float l, w;
+        cout << "Enter length: ";
+        cin >> l;
+        cout << "Enter width: ";
+        cin >> w;
 
-    s1 -> area();
-    s2 -> area();
+        shape = new Rectangle(l, w);
+    }
+    else if (choice == 2) {
+        float r;
+        cout << "Enter radius: ";
+        cin >> r;
 
+        shape = new Circle(r);
+    }
+    else {
+        cout << "Invalid choice !" << endl;
+        return 0;
+    }
+
+    shape -> area();
+
+    delete shape;
     return 0;
 }
